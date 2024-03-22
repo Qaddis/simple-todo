@@ -1,0 +1,29 @@
+<script setup>
+import { RouterView } from "vue-router";
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
+</script>
+
+<template>
+	<AppHeader />
+
+	<main>
+		<div class="wrapper">
+			<RouterView />
+		</div>
+	</main>
+
+	<AppFooter />
+</template>
+
+<style scoped>
+main {
+	width: 100%;
+	height: auto;
+	padding: 20px;
+}
+
+h2 {
+	text-align: center;
+}
+</style>
