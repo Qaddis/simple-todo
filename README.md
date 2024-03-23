@@ -6,8 +6,8 @@ Implemented in Vue (Composition API), Express and MongoDB.
 
 ## How to start
 
-1. Create a new db called "simple-todo";
-2. Open the console and go to the project folder;
+1. Create a new db called "simple-todo"
+2. Open the console and go to the project folder
 3. `npm i`
 4. `npm start`
 5. Then open another console and go to the project folder
