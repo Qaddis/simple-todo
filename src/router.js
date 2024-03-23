@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import MainPage from "./views/MainPage.vue";
-import ProfilePage from "./views/PorfilePage.vue";
+import ProfilePage from "./views/ProfilePage.vue";
+import LoginPage from "./views/LoginPage.vue";
+import SignupPage from "./views/SignupPage.vue";
 
 export default createRouter({
 	history: createWebHistory(),
@@ -16,6 +18,16 @@ export default createRouter({
 			path: "/profile",
 			name: "profile",
 			component: ProfilePage,
+		},
+		{
+			path: "/log-in",
+			name: "login",
+			component: LoginPage,
+		},
+		{
+			path: "/sign-up",
+			name: "signup",
+			component: SignupPage,
 		},
 	],
 });

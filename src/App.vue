@@ -2,6 +2,9 @@
 import { RouterView } from "vue-router";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3002";
 </script>
 
 <template>
@@ -20,10 +23,12 @@ import AppFooter from "./components/AppFooter.vue";
 main {
 	width: 100%;
 	height: auto;
-	padding: 20px;
+	padding: 50px 20px;
 }
 
-h2 {
-	text-align: center;
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 </style>

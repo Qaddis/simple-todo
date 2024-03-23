@@ -86,3 +86,71 @@ nav ul {
 .nav-li--active::after {
 	opacity: 1;
 }
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.login-form input {
+	width: 300px;
+	border: 2px solid var(--violet);
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin-bottom: 20px;
+	text-align: center;
+	color: var(--dark);
+	transition: all 0.2s;
+}
+
+.login-form input:focus {
+	border-color: var(--lime);
+}
+
+.login-form button {
+	width: 250px;
+	background-color: var(--violet);
+	padding: 10px 15px;
+	border-radius: 10px;
+	color: var(--light);
+
+	transition: all 0.2s;
+}
+
+.login-form button:hover {
+	background-color: var(--lime);
+}
+
+.login-form button:active {
+	transform: translateY(1px);
+	opacity: 0.8;
+}
+
+.login-form button:focus-visible {
+	outline: 2px dashed var(--lime);
+	outline-offset: 3px;
+}
+
+.login-form .link {
+	color: var(--dark);
+	text-decoration: underline;
+	margin-top: 15px;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+.login-form .link:hover {
+	color: var(--violet);
+}
+
+.login-form .errors {
+	color: lightcoral;
+	margin-top: 20px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.errors.--active {
+	opacity: 1;
+}

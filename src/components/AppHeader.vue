@@ -3,32 +3,24 @@ import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
-
-const goProfile = () => {
-	router.push("/profile");
-};
-
-const goMain = () => {
-	router.push("/");
-};
 </script>
 
 <template>
 	<header>
 		<div class="wrapper">
-			<h1 @click="goMain">Simple ToDo</h1>
+			<h1 @click="router.push('/')">Simple ToDo</h1>
 
 			<nav>
 				<ul>
 					<li
-						@click="goMain"
+						@click="router.push('/')"
 						class="nav-li"
 						:class="[route.name == 'main' ? 'nav-li--active' : '']"
 					>
 						Главная
 					</li>
 					<li
-						@click="goProfile"
+						@click="router.push('/profile')"
 						class="nav-li"
 						:class="[route.name == 'profile' ? 'nav-li--active' : '']"
 					>
