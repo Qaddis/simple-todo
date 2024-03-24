@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 		{
 			title: String,
 			description: String,
-			type: String,
+			category: String,
 			isCompleted: Boolean,
 		},
 	],
@@ -49,13 +49,82 @@ app.listen(port, () => {
 });
 
 // Роуты
-app.get("/tasks/get", async (req, res) => {});
+app.get("/tasks/get", async (req, res) => {
+	const id = req.query.id;
 
-app.get("/tasks/complete", async (req, res) => {});
+	const user = await User.findById(id);
 
-app.get("/tasks/create", async (req, res) => {});
+	if (user) {
+		res.send(user.tasks);
+	} else {
+		res.send("no such user");
+	}
+});
 
-app.get("/tasks/remove", async (req, res) => {});
+app.get("/tasks/complete", async (req, res) => {
+	const { id, task } = req.query;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		let itemIndex = user.tasks.findIndex((item) => item._id === task);
+		user.tasks[itemIndex].isCompleted ^= true;
+
+		try {
+			await user.save();
+			res.send(user.tasks);
+		} catch {
+			res.send("error");
+		}
+	} else {
+		res.send("no such user");
+	}
+});
+
+app.post("/tasks/create", async (req, res) => {
+	const { id, title, description, category } = req.body;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		const newTask = {
+			title: title,
+			description: description,
+			category: category,
+			isCompleted: false,
+		};
+
+		user.tasks.push(newTask);
+
+		try {
+			await user.save();
+			res.send(user.tasks);
+		} catch {
+			res.send("error");
+		}
+	} else {
+		res.send("no such user");
+	}
+});
+
+app.post("/tasks/remove", async (req, res) => {
+	const { id, task } = req.body;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		user.tasks = user.tasks.filter((item) => item._id !== task);
+
+		try {
+			await user.save();
+			res.send(user.tasks);
+		} catch {
+			res.send("error");
+		}
+	} else {
+		res.send("no such user");
+	}
+});
 
 app.post("/user/log-in", async (req, res) => {
 	const { email, password } = req.body;

@@ -2,9 +2,6 @@
 import { RouterView } from "vue-router";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
-
-import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3002";
 </script>
 
 <template>
