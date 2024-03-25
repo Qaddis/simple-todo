@@ -50,12 +50,29 @@ app.listen(port, () => {
 
 // Роуты
 app.get("/tasks/get", async (req, res) => {
-	const id = req.query.id;
+	const { id, category, novelty, completed } = req.query;
 
 	const user = await User.findById(id);
+	let tasks = user.tasks;
 
 	if (user) {
-		res.send(user.tasks);
+		if (category !== "all") {
+			tasks = tasks.filter((task) => task.category === category);
+		}
+
+		if (completed !== "all") {
+			if (completed == "true") {
+				tasks = tasks.filter((task) => task.isCompleted == true);
+			} else {
+				tasks = tasks.filter((task) => task.isCompleted == false);
+			}
+		}
+
+		if (novelty == "new") {
+			tasks = tasks.reverse();
+		}
+
+		res.send(tasks);
 	} else {
 		res.send("no such user");
 	}
@@ -67,12 +84,12 @@ app.get("/tasks/complete", async (req, res) => {
 	let user = await User.findById(id);
 
 	if (user) {
-		let itemIndex = user.tasks.findIndex((item) => item._id === task);
+		let itemIndex = user.tasks.findIndex((item) => item._id == task);
 		user.tasks[itemIndex].isCompleted ^= true;
 
 		try {
 			await user.save();
-			res.send(user.tasks);
+			res.send("yep");
 		} catch {
 			res.send("error");
 		}
@@ -98,7 +115,7 @@ app.post("/tasks/create", async (req, res) => {
 
 		try {
 			await user.save();
-			res.send(user.tasks);
+			res.send("yep");
 		} catch {
 			res.send("error");
 		}
@@ -111,13 +128,12 @@ app.post("/tasks/remove", async (req, res) => {
 	const { id, task } = req.body;
 
 	let user = await User.findById(id);
-
 	if (user) {
-		user.tasks = user.tasks.filter((item) => item._id !== task);
+		user.tasks = user.tasks.filter((item) => item._id != task);
 
 		try {
 			await user.save();
-			res.send(user.tasks);
+			res.send("yep");
 		} catch {
 			res.send("error");
 		}

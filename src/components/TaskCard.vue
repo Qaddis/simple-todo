@@ -1,21 +1,29 @@
 <script setup>
 const props = defineProps({
+	id: String,
 	title: String,
 	description: String,
 	category: String,
 	isCompleted: Boolean,
+	clickHandler: Function,
 });
 </script>
 
 <template>
-	<div class="task-card" :class="props.category">
-		<div :class="{ border: props.description != '' }">
-			<span :class="{ completed: props.isCompleted }" class="title">
-				{{ props.title }}
-			</span>
-			<span class="category">{{ props.category }}</span>
+	<div
+		class="task-card"
+		:class="[props.category, { completed: props.isCompleted }]"
+	>
+		<div>
+			<div>
+				<span class="title">
+					{{ props.title }}
+				</span>
+				<span class="category">{{ props.category }}</span>
+			</div>
+			<button @click.stop="props.clickHandler(props.id)">X</button>
 		</div>
-		<p v-if="props.description != ''" :class="{ completed: props.isCompleted }">
+		<p v-if="props.description != ''" class="border">
 			{{ props.description }}
 		</p>
 	</div>
@@ -37,6 +45,7 @@ const props = defineProps({
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	column-gap: 10px;
 }
 
 .title {
@@ -46,8 +55,8 @@ const props = defineProps({
 }
 
 .task-card .border {
-	border-bottom: 2px dashed #8360c3;
-	padding-bottom: 10px;
+	border-top: 2px dashed var(--light);
+	padding-top: 5px;
 }
 
 .category {
@@ -66,7 +75,32 @@ p {
 	color: var(--light);
 }
 
+button {
+	font-family: var(--header-font);
+	color: var(--light);
+	padding: 5px 10px;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	transition: 0.14s all;
+}
+
+button:hover,
+button:focus-visible {
+	background-color: rgba(0, 0, 0, 0.4);
+	outline: none;
+}
+
+button:active {
+	transform: translateY(1px);
+	opacity: 0.8;
+}
+
 .completed {
+	filter: grayscale(50%);
+}
+
+.completed .title,
+.completed p {
 	text-decoration: line-through;
 	text-decoration-color: var(--light);
 }

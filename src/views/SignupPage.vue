@@ -93,6 +93,7 @@ onMounted(async () => {
 
 <style scoped>
 section {
+	width: auto;
 	padding: 20px;
 	border: 3px solid var(--violet);
 	border-image: linear-gradient(

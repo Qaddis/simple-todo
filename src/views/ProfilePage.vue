@@ -3,7 +3,9 @@ import { ref } from "vue";
 </script>
 
 <template>
-	<section></section>
+	<section>
+		<h2>Profile page</h2>
+	</section>
 </template>
 
 <style></style>
