@@ -102,7 +102,7 @@ span.--active {
 }
 
 form label {
-	color: var(--violet);
+	color: var(--dark);
 	margin-bottom: 5px;
 }
 
@@ -112,7 +112,7 @@ form input {
 	padding: 5px 10px;
 	text-align: center;
 	color: var(--dark);
-	border: 2px solid var(--violet);
+	border: 2px solid var(--additional);
 	border-radius: 5px;
 	margin-bottom: 10px;
 
@@ -126,7 +126,7 @@ form textarea {
 	min-height: 100px;
 	padding: 5px;
 	color: var(--dark);
-	border: 2px solid var(--violet);
+	border: 2px solid var(--additional);
 	border-radius: 5px;
 	margin-bottom: 10px;
 	transition: all 0.2s;
@@ -137,8 +137,8 @@ form select {
 	height: auto;
 	text-align: center;
 	padding: 5px 10px;
-	color: var(--violet);
-	border: 2px solid var(--violet);
+	color: var(--dark);
+	border: 2px solid var(--additional);
 	border-radius: 5px;
 	margin-bottom: 10px;
 	transition: all 0.2s;
@@ -162,17 +162,17 @@ form input:focus,
 form textarea:focus,
 form select:focus {
 	outline: none;
-	border-color: var(--lime);
+	border-color: var(--violet);
 }
 
 select option {
 	color: var(--dark);
-	border: 1px solid var(--violet);
+	border: 1px solid var(--additional);
 	outline: none;
 }
 
 select:focus option {
-	border-color: var(--lime);
+	border-color: var(--violet);
 }
 
 form button:hover {

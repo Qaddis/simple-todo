@@ -170,7 +170,7 @@ h2 {
 }
 
 .filters label {
-	color: var(--violet);
+	color: var(--dark);
 	transition: 0.1s all;
 	margin-bottom: 5px;
 }
@@ -180,10 +180,10 @@ h2 {
 	height: auto;
 
 	text-align: center;
-	color: var(--violet);
+	color: var(--dark);
 	padding: 5px;
 	background-color: var(--light);
-	border: 2px solid var(--violet);
+	border: 2px solid var(--additional);
 	border-radius: 5px;
 
 	transition: 0.2s all;
@@ -191,7 +191,7 @@ h2 {
 
 .filters select:focus {
 	outline: none;
-	border-color: var(--lime);
+	border-color: var(--violet);
 }
 
 .filters h3 {

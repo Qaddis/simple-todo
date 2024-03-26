@@ -117,6 +117,11 @@ onMounted(checkAuth);
 	border-radius: 5px;
 	color: var(--dark);
 	text-align: center;
+	transition: border 0.2s;
+}
+
+.to-change input:focus {
+	border-color: var(--violet);
 }
 
 .to-change button {
