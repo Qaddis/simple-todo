@@ -84,8 +84,8 @@ app.get("/tasks/complete", async (req, res) => {
 	let user = await User.findById(id);
 
 	if (user) {
-		let itemIndex = user.tasks.findIndex((item) => item._id == task);
-		user.tasks[itemIndex].isCompleted ^= true;
+		let taskIndex = user.tasks.findIndex((item) => item._id == task);
+		user.tasks[taskIndex].isCompleted ^= true;
 
 		try {
 			await user.save();
@@ -179,6 +179,18 @@ app.post("/user/sign-up", async (req, res) => {
 		} catch {
 			res.send("error");
 		}
+	}
+});
+
+app.post("/user/get", async (req, res) => {
+	let id = req.body.id;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		res.send(user);
+	} else {
+		res.send("no such user");
 	}
 });
 
