@@ -221,3 +221,66 @@ app.post("/user/to-change-data", async (req, res) => {
 		res.send("no such user");
 	}
 });
+
+app.post("/user/change/name", async (req, res) => {
+	const { id, newName } = req.body;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		user.name = newName;
+
+		try {
+			await user.save();
+			res.send(user);
+		} catch {
+			res.send("error");
+		}
+	} else {
+		res.send("no such user");
+	}
+});
+
+app.post("/user/change/email", async (req, res) => {
+	const { id, newEmail } = req.body;
+
+	const user = await User.findOne({ email: newEmail });
+
+	if (user) {
+		res.send("email registered");
+	} else {
+		let user = await User.findById(id);
+
+		if (user) {
+			user.email = newEmail;
+
+			try {
+				await user.save();
+				res.send(user);
+			} catch {
+				res.send("error");
+			}
+		} else {
+			res.send("no such user");
+		}
+	}
+});
+
+app.post("/user/change/password", async (req, res) => {
+	const { id, newPassword } = req.body;
+
+	let user = await User.findById(id);
+
+	if (user) {
+		user.password = newPassword;
+
+		try {
+			await user.save();
+			res.send(user);
+		} catch {
+			res.send("error");
+		}
+	} else {
+		res.send("no such user");
+	}
+});

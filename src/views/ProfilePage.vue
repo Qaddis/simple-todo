@@ -25,6 +25,10 @@ const showError = (msg) => {
 	}, 3000);
 };
 
+const changeUserData = (value) => {
+	userData.value = value;
+};
+
 async function toChangeData() {
 	const user = Cookies.get("user");
 
@@ -79,7 +83,12 @@ onMounted(checkAuth);
 		<GoLogin />
 	</section>
 	<section v-else-if="changeData && userData">
-		<ChangeDataForm />
+		<ChangeDataForm
+			:name="userData.name"
+			:email="userData.email"
+			:password="userData.password"
+			:changeState="changeUserData"
+		/>
 	</section>
 	<section v-else-if="!changeData && userData">
 		<h2>Профиль</h2>
