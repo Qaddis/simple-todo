@@ -111,4 +111,13 @@ h2 {
 	text-align: center;
 	margin-bottom: 25px;
 }
+
+button {
+	width: 250px;
+}
+
+input {
+	width: 300px;
+	margin-bottom: 20px;
+}
 </style>

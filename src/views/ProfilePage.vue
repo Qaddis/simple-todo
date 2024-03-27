@@ -4,15 +4,53 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 import GoLogin from "../components/GoLogin.vue";
+import ChangeDataForm from "../components/ChangeDataForm.vue";
 
 const userData = ref("loading");
+const changeData = ref(false);
 const mailType = ref("password");
 const mailTypeSymbol = ref("?");
+const password = ref("");
+const error = ref("");
 
 const changeMailType = () => {
 	mailType.value = mailType.value === "password" ? "text" : "password";
 	mailTypeSymbol.value = mailTypeSymbol.value === "?" ? "!" : "?";
 };
+
+const showError = (msg) => {
+	error.value = msg;
+	setTimeout(() => {
+		error.value = "";
+	}, 3000);
+};
+
+async function toChangeData() {
+	const user = Cookies.get("user");
+
+	if (user) {
+		if (password.value.trim() != "") {
+			const response = await axios.post("/user/to-change-data", {
+				id: user,
+				password: password.value,
+			});
+
+			if (response.data) {
+				changeData.value = true;
+			} else if (response.data === "no such user") {
+				Cookies.remove("user");
+				userData.value = false;
+			} else {
+				showError("Ошибка! Неправильный пароль!");
+				password.value = "";
+			}
+		} else {
+			showError("Ошибка! Поле заполнено некорректно!");
+		}
+	} else {
+		userData.value = false;
+	}
+}
 
 async function checkAuth() {
 	const user = Cookies.get("user");
@@ -40,7 +78,10 @@ onMounted(checkAuth);
 	<section v-else-if="!userData">
 		<GoLogin />
 	</section>
-	<section v-else>
+	<section v-else-if="changeData && userData">
+		<ChangeDataForm />
+	</section>
+	<section v-else-if="!changeData && userData">
 		<h2>Профиль</h2>
 		<div class="inf">
 			<h3>{{ userData.name }}</h3>
@@ -53,8 +94,10 @@ onMounted(checkAuth);
 		</div>
 		<div class="to-change">
 			<h3>Введите <span>пароль</span>, чтобы изменить данные</h3>
-			<input type="password" />
-			<button>Продолжить</button>
+			<input type="password" v-model="password" />
+			<button @click="toChangeData">Продолжить</button>
+
+			<span class="error" v-if="error != ''">{{ error }}</span>
 		</div>
 	</section>
 </template>
@@ -112,32 +155,11 @@ onMounted(checkAuth);
 
 .to-change input {
 	width: 300px;
-	padding: 5px 10px;
-	border: 3px solid var(--additional);
-	border-radius: 5px;
-	color: var(--dark);
-	text-align: center;
-	transition: border 0.2s;
 }
 
-.to-change input:focus {
-	border-color: var(--violet);
-}
-
-.to-change button {
-	padding: 10px 20px;
-	background-color: var(--violet);
-	color: var(--light);
-	border-radius: 10px;
-	transition: all 0.2s;
-}
-
-.to-change button:hover {
-	background-color: var(--lime);
-}
-
-.to-change button:active {
-	opacity: 0.8;
-	transform: translateY(1px);
+.error {
+	margin-top: 15px;
+	color: lightcoral !important;
+	transition: opacity 0.2s;
 }
 </style>

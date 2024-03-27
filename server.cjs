@@ -205,3 +205,19 @@ app.get("/user/check", async (req, res) => {
 		res.send(false);
 	}
 });
+
+app.post("/user/to-change-data", async (req, res) => {
+	const { id, password } = req.body;
+
+	const user = await User.findById(id);
+
+	if (user) {
+		if (user.password === password) {
+			res.send(true);
+		} else {
+			res.send(false);
+		}
+	} else {
+		res.send("no such user");
+	}
+});

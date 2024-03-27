@@ -21,12 +21,12 @@ export default createRouter({
 		},
 		{
 			path: "/log-in",
-			name: "login",
+			name: "log-in",
 			component: LoginPage,
 		},
 		{
 			path: "/sign-up",
-			name: "signup",
+			name: "sign-up",
 			component: SignupPage,
 		},
 	],

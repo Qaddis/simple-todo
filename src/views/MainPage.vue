@@ -178,20 +178,6 @@ h2 {
 .filters select {
 	width: 100%;
 	height: auto;
-
-	text-align: center;
-	color: var(--dark);
-	padding: 5px;
-	background-color: var(--light);
-	border: 2px solid var(--additional);
-	border-radius: 5px;
-
-	transition: 0.2s all;
-}
-
-.filters select:focus {
-	outline: none;
-	border-color: var(--violet);
 }
 
 .filters h3 {

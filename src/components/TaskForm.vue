@@ -101,22 +101,9 @@ span.--active {
 	opacity: 1;
 }
 
-form label {
-	color: var(--dark);
-	margin-bottom: 5px;
-}
-
 form input {
 	width: 500px;
-	height: auto;
-	padding: 5px 10px;
-	text-align: center;
-	color: var(--dark);
-	border: 2px solid var(--additional);
-	border-radius: 5px;
 	margin-bottom: 10px;
-
-	transition: all 0.2s;
 }
 
 form textarea {
@@ -124,70 +111,16 @@ form textarea {
 	min-width: 500px;
 	max-height: 200px;
 	min-height: 100px;
-	padding: 5px;
-	color: var(--dark);
-	border: 2px solid var(--additional);
-	border-radius: 5px;
 	margin-bottom: 10px;
-	transition: all 0.2s;
 }
 
 form select {
 	width: 500px;
-	height: auto;
-	text-align: center;
-	padding: 5px 10px;
-	color: var(--dark);
-	border: 2px solid var(--additional);
-	border-radius: 5px;
 	margin-bottom: 10px;
-	transition: all 0.2s;
 }
 
 form button {
-	font-size: 18px;
-	display: inline-block;
 	width: 350px;
-	padding: 5px 10px;
-	border: none;
-	border-radius: 5px;
-	text-align: center;
-	background-color: var(--violet);
-	color: var(--light);
 	margin-top: 25px;
-	transition: all 0.2s;
-}
-
-form input:focus,
-form textarea:focus,
-form select:focus {
-	outline: none;
-	border-color: var(--violet);
-}
-
-select option {
-	color: var(--dark);
-	border: 1px solid var(--additional);
-	outline: none;
-}
-
-select:focus option {
-	border-color: var(--violet);
-}
-
-form button:hover {
-	cursor: pointer;
-	background-color: var(--lime);
-	color: var(--light);
-}
-
-form button:active {
-	opacity: 0.8;
-	transform: translateY(1px);
-}
-
-form button:focus-visible {
-	outline: 2px dashed var(--lime);
-	outline-offset: 3px;
 }
 </style>
