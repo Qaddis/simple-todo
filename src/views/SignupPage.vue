@@ -38,7 +38,7 @@ const newUser = async (evt) => {
 			showError("Ошибка! Попробуйте ещё раз!");
 		} else {
 			Cookies.set("user", response.data, { expires: 30, path: "" });
-			router.push("/profile");
+			router.push("/");
 		}
 	} else {
 		showError("Не все поля заполнены корректно!");

@@ -89,12 +89,7 @@ onMounted(getTasks);
 				<h3>Фильтры</h3>
 
 				<label for="category">Категория:</label>
-				<select
-					@change="getTasks"
-					v-model="byCategory"
-					name="sbc"
-					id="category"
-				>
+				<select @change="getTasks" v-model="byCategory" id="category">
 					<option value="work">Работа</option>
 					<option value="study">Учеба</option>
 					<option value="routine">Дела по дому</option>
@@ -206,7 +201,7 @@ h2 {
 }
 
 .tasks h3 {
-	color: var(--violet);
-	opacity: 0.75;
+	color: var(--additional);
+	opacity: 0.85;
 }
 </style>

@@ -99,7 +99,7 @@ onMounted(checkAuth);
 			</div>
 		</div>
 		<div class="to-change">
-			<h3>Введите <span>пароль</span>, чтобы изменить данные</h3>
+			<h3>Введите <span>пароль</span>, чтобы изменить данные или выйти</h3>
 			<input type="password" v-model="password" />
 			<button @click="toChangeData">Продолжить</button>
 
@@ -113,7 +113,16 @@ onMounted(checkAuth);
 			:password="userData.password"
 			:changeState="changeUserData"
 		/>
-		<button class="back" @click="changeData = false">Назад</button>
+		<button
+			class="exit-btn"
+			@click="
+				Cookies.remove('user');
+				checkAuth();
+			"
+		>
+			Выйти
+		</button>
+		<button class="back-btn" @click="changeData = false">Назад</button>
 	</section>
 </template>
 
@@ -191,7 +200,20 @@ section:last-child {
 	align-items: center;
 }
 
-.back {
+.exit-btn {
+	width: 20%;
+	margin-top: 25px;
+	background-color: transparent;
+	border: 2px solid lightcoral;
+	color: lightcoral;
+}
+
+.exit-btn:hover {
+	color: var(--light);
+	background-color: lightcoral;
+}
+
+.back-btn {
 	width: 40%;
 	margin-top: 35px;
 }
