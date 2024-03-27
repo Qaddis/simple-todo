@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -12,6 +13,8 @@ const mailType = ref("password");
 const mailTypeSymbol = ref("?");
 const password = ref("");
 const error = ref("");
+
+const router = useRouter();
 
 const changeMailType = () => {
 	mailType.value = mailType.value === "password" ? "text" : "password";
@@ -54,6 +57,8 @@ async function toChangeData() {
 	} else {
 		userData.value = false;
 	}
+
+	password.value = "";
 }
 
 async function checkAuth() {
@@ -82,14 +87,6 @@ onMounted(checkAuth);
 	<section v-else-if="!userData">
 		<GoLogin />
 	</section>
-	<section v-else-if="changeData && userData">
-		<ChangeDataForm
-			:name="userData.name"
-			:email="userData.email"
-			:password="userData.password"
-			:changeState="changeUserData"
-		/>
-	</section>
 	<section v-else-if="!changeData && userData">
 		<h2>Профиль</h2>
 		<div class="inf">
@@ -108,6 +105,15 @@ onMounted(checkAuth);
 
 			<span class="error" v-if="error != ''">{{ error }}</span>
 		</div>
+	</section>
+	<section v-else-if="changeData && userData">
+		<ChangeDataForm
+			:name="userData.name"
+			:email="userData.email"
+			:password="userData.password"
+			:changeState="changeUserData"
+		/>
+		<button class="back" @click="changeData = false">Назад</button>
 	</section>
 </template>
 
@@ -128,6 +134,7 @@ onMounted(checkAuth);
 	width: 300px;
 	color: var(--dark);
 	border: 3px solid var(--additional);
+	border-radius: 0;
 	border-right: none;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -138,12 +145,18 @@ onMounted(checkAuth);
 .mailType {
 	width: 30px;
 	padding: 5px;
+	font-size: 16px;
 	border: 3px solid var(--additional);
 	border-left: none;
+	border-radius: 0;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	background-color: var(--violet);
 	color: var(--light);
+}
+
+.mailType:active {
+	transform: none;
 }
 
 .to-change {
@@ -170,5 +183,16 @@ onMounted(checkAuth);
 	margin-top: 15px;
 	color: lightcoral !important;
 	transition: opacity 0.2s;
+}
+
+section:last-child {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.back {
+	width: 40%;
+	margin-top: 35px;
 }
 </style>
