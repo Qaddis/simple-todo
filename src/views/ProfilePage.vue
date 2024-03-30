@@ -6,6 +6,7 @@ import axios from "axios";
 
 import GoLogin from "../components/GoLogin.vue";
 import ChangeDataForm from "../components/ChangeDataForm.vue";
+import Stats from "../components/Stats.vue";
 
 const userData = ref("loading");
 const changeData = ref(false);
@@ -97,6 +98,9 @@ onMounted(checkAuth);
 					{{ mailTypeSymbol }}
 				</button>
 			</div>
+		</div>
+		<div class="stats" v-if="userData.tasks != ''">
+			<Stats :tasks="userData.tasks" />
 		</div>
 		<div class="to-change">
 			<h3>Введите <span>пароль</span>, чтобы изменить данные или выйти</h3>
@@ -192,6 +196,13 @@ onMounted(checkAuth);
 	margin-top: 15px;
 	color: lightcoral !important;
 	transition: opacity 0.2s;
+}
+
+.stats {
+	margin-top: 50px;
+	padding: 25px;
+	border: 3px dashed var(--additional);
+	border-radius: 10px;
 }
 
 section:last-child {
